@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Support\Str;
+
+return [
+
+    'driver' => env('SESSION_DRIVER', 'database'),
+
+    'lifetime' => (int) env('SESSION_LIFETIME', 120),
+
+    'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
+
+    'encrypt' => env('SESSION_ENCRYPT', false),
+
+    'files' => storage_path('framework/sessions'),
+
+    'connection' => env('SESSION_CONNECTION'),
+
+    'table' => env('SESSION_TABLE', 'sessions'),
+
+    'store' => env('SESSION_STORE'),
+
+    'lottery' => [2, 100],
+
+    'cookie' => env(
+        'SESSION_COOKIE',
+        Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
+    ),
+
+    'path' => env('SESSION_PATH', '/'),
+
+    'domain' => env('SESSION_DOMAIN'),
+
+    // HTTPS wajib sejak hari pertama di produksi (PRD §18.5) — cookie secure
+    // hanya di-force di lingkungan production, agar dev lokal (http) tetap jalan.
+    'secure' => env('SESSION_SECURE_COOKIE', env('APP_ENV') === 'production'),
+
+    'http_only' => true,
+
+    'same_site' => 'lax',
+
+    'partitioned' => false,
+
+];
